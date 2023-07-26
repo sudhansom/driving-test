@@ -16,6 +16,9 @@
       <input type="radio" value="no" formControlName="answer">no
     </label>
   </label>
+  <label>Answer Explanation:
+    <input type="text" />
+  </label>
   <button type="submit">Submit</button>
   <div *ngIf="imageUrl">
     <img [src]="imageUrl" alt="Uploaded Image" />

@@ -1,2 +1,24 @@
+<form (ngSubmit)="onSubmit()">
+  <label>Image url:
+    <input type="file" (change)="onFileSelected($event)" name="image" accept="image/*" />
+  </label>
+  <label>Explanation:
+    <input type="text" />
+  </label>
+  <label>Question:
+    <input type="text" />
+  </label>
+  <label class="answer">Answer:
+    <label>
+      <input type="radio" value="yes" formControlName="answer">yes
+    </label>
+    <label>
+      <input type="radio" value="no" formControlName="answer">no
+    </label>
+  </label>
+  <button type="submit">Submit</button>
+  <div *ngIf="imageUrl">
+    <img [src]="imageUrl" alt="Uploaded Image" />
+  </div>
 
-<h1>InputForm Component...</h1>
+</form>

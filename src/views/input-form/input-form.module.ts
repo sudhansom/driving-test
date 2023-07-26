@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { InputFormComponent } from "./input-form.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 const appRoutes: Routes = [
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(appRoutes),
+    ReactiveFormsModule,
   ],
   exports:[],
   providers: [],

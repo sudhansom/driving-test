@@ -1,0 +1,20 @@
+:host {
+  .container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 12px;
+    img {
+      max-width: 100%;
+    }
+    .explanation {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 30px;
+    }
+    .question {
+      display: flex;
+      align-items: center;
+      gap: 100px;
+    }
+  }
+}

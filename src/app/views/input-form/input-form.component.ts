@@ -11,44 +11,49 @@ import { ImageUploadService } from 'src/app/services/image-upload.service';
   //changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputFormComponent implements OnInit {
+  reactiveForm: FormGroup = new FormGroup<any>({});
 
-  selectedFile: any; //File | null = null;
-  imageUrl: any;// string | null = null;
+  selectedFile: File | null = null;
+  imageUrl: File | null = null;
 
 
   constructor(private imageUploadService: ImageUploadService) {}
-  reactiveForm: FormGroup = new FormGroup<any>({});
 
   onFileSelected(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
       this.selectedFile = inputElement.files[0];
-      this.imageUrl = this.selectedFile;
+      var reader = new FileReader();
+      reader.readAsDataURL(this.selectedFile);
+      reader.onload = (event: any) => {
+        this.imageUrl = event.target.result;
+      }
     }
   }
 
   onSubmit(): void {
     if (this.selectedFile) {
+      console.log(typeof(this.imageUrl));
 
-    console.log(typeof(this.selectedFile));
-
-    console.log('form submitted', this.reactiveForm.value.image);
-
-      // this.imageUploadService.uploadImage(this.selectedFile).subscribe(
-      //   (response) => {
-      //     // Assuming the server returns the URL of the uploaded image
-      //     this.imageUrl = response.imageUrl;
-      //   },
-      //   (error) => {
-      //     console.error('Error uploading image:', error);
-      //   }
-      // );
+      this.imageUploadService.uploadForm(this.reactiveForm.value).subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.error('Error uploading image:', error);
+        }
+      );
     }
   }
 
   ngOnInit(): void {
+    this.imageUploadService.getFormData().subscribe(form => {
+      //this.imageUrl = form.image;
+      console.log(form['-NaLSM7kmyicx3EhvCZg']?.image);
+      this.imageUrl = form['-NaLSM7kmyicx3EhvCZg']?.image;
+    })
     this.reactiveForm = new FormGroup({
-      image: new FormControl(null, this.selectedFile),
+      image: new FormControl(null),
       explanation: new FormControl(null),
       question: new FormControl(null),
       answer: new FormControl(true),

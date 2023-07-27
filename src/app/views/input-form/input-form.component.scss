@@ -27,5 +27,14 @@
         flex-direction: row;
       }
     }
+
+    button {
+      cursor: pointer;
+      margin: 12px 0 ;
+      transition: all .6s ease-in-out;
+      &:hover {
+        background-color: rgb(183, 174, 174);
+      }
+    }
   }
 }

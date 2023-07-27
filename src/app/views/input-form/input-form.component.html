@@ -1,12 +1,12 @@
-<form (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" [formGroup]="reactiveForm">
   <label>Image url:
-    <input type="file" (change)="onFileSelected($event)" name="image" accept="image/*" />
+    <input type="file" (change)="onFileSelected($event)" formControlName="image" accept="image/*" />
   </label>
   <label>Explanation:
-    <input type="text" />
+    <input type="text" formControlName="explanation" />
   </label>
   <label>Question:
-    <input type="text" />
+    <input type="text" formControlName="question" />
   </label>
   <label class="answer">Answer:
     <label>

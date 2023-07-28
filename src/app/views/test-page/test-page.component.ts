@@ -16,6 +16,8 @@ export class TestPageComponent implements OnInit {
   count = -1;
   currentData: any;
 
+  allAnswers: any[] = []
+
   showNextButton = false;
 
   currentIndex = 0;
@@ -46,6 +48,28 @@ export class TestPageComponent implements OnInit {
       ]
     },
     {
+      image: '../../../assets/images/image3.png',
+      explanation: ' You are driving 30 km/h. How will you continue?',
+      options: [
+        {
+          question: 'I pay special attention to the road work?',
+          answer: true,
+        },
+        {
+          question: 'I continue with the same or almost the same speed of 30 km/h?',
+          answer: false,
+        },
+        {
+          question: 'I break?',
+          answer: true,
+        },
+        {
+          question: 'I pay special attention to the white road markings?',
+          answer: false,
+        }
+      ]
+    },
+    {
       image: '../../../assets/images/image2.png',
       explanation: ' You are staying by the curb and would like to set off. What will you do?',
       options: [
@@ -67,6 +91,50 @@ export class TestPageComponent implements OnInit {
         }
       ]
     },
+    {
+      image: '../../../assets/images/image4.png',
+      explanation: ' You are driving at about 70 km/h. There is no traffic from behind. How will you continue?',
+      options: [
+        {
+          question: 'I cross broken lines in the middle of the road to flatten the bend?',
+          answer: false,
+        },
+        {
+          question: 'I move close to the right edge of the road?',
+          answer: false,
+        },
+        {
+          question: 'I stay in the middle of my lane?',
+          answer: true,
+        },
+        {
+          question: 'I slow down?',
+          answer: true,
+        }
+      ]
+    },
+    {
+      image: '../../../assets/images/image5.png',
+      explanation: ' You are driving at about 70 km/h. How will you continue?',
+      options: [
+        {
+          question: 'I continue at the same speed of 70 km/h?',
+          answer: false,
+        },
+        {
+          question: 'I slow down and continue at the speed of about 50 km/h?',
+          answer: true,
+        },
+        {
+          question: 'I pay special attention to the road surroundings? (condition of the road)',
+          answer: true,
+        },
+        {
+          question: 'I pay special attention to the course of the road?',
+          answer: true,
+        }
+      ]
+    },
   ];
 
   fetchData(){
@@ -78,7 +146,9 @@ export class TestPageComponent implements OnInit {
   }
 
 
-  moveForward(){
+  moveForward(e:any){
+    this.currentData.options[this.count].givenAnswer = e.target.value
+    console.log(this.currentData);
     if(this.count < this.currentData.options.length - 1){
       this.count = this.count + 1;
       this.stopSpeak();
@@ -90,11 +160,15 @@ export class TestPageComponent implements OnInit {
   }
 
   nextQuestion(){
+    this.allAnswers.push(this.currentData);
     this.count = 0;
     this.showNextButton = false;
-    if(this.currentIndex < this.data.length){
+    if(this.currentIndex < this.data.length - 1){
       this.currentIndex = this.currentIndex + 1;
       this.fetchData();
+    }
+    else{
+      console.log(this.allAnswers);
     }
   }
 
@@ -115,7 +189,7 @@ export class TestPageComponent implements OnInit {
     if ('speechSynthesis' in window) {
       const speechSynthesis = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(textToSpeak);
-      utterance.rate = .85;
+      utterance.rate = .80;
       speechSynthesis.speak(utterance);
       this.currentUtterance = utterance;
 

@@ -1,7 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-
+type IData = {
+  image: string,
+  explanation: string,
+  options: {
+    question: string,
+    answer: boolean,
+    givenAnswer?: boolean
+  }[]
+}
 
 @Component({
   selector: 'app-test-page',
@@ -13,10 +21,13 @@ export class TestPageComponent implements OnInit {
 
   currentUtterance: SpeechSynthesisUtterance | null = null;
 
+  wrongAnswers = 0;
+
+
   count = -1;
   currentData: any;
 
-  allAnswers: any[] = []
+  allAnswers: IData[] = []
 
   showNextButton = false;
 
@@ -24,7 +35,7 @@ export class TestPageComponent implements OnInit {
 
   answers = [];
 
-  data = [
+  data: IData[] = [
     {
       image: '../../../assets/images/image1.png',
       explanation: ' What are the rules about warning triangle, in this situation?',
@@ -139,15 +150,12 @@ export class TestPageComponent implements OnInit {
 
   fetchData(){
   this.currentData = this.data[this.currentIndex];
-  const timerId = setTimeout(()=>{
-    this.sayQuestion();
-    clearTimeout(timerId);
-  }, 100)
+  this.sayQuestion();
   }
 
 
-  moveForward(e:any){
-    this.currentData.options[this.count].givenAnswer = e.target.value
+  moveForward(e:any, i: number){
+    this.currentData.options[i].givenAnswer = e.target.value==='true'? true : false;
     console.log(this.currentData);
     if(this.count < this.currentData.options.length - 1){
       this.count = this.count + 1;
@@ -160,6 +168,7 @@ export class TestPageComponent implements OnInit {
   }
 
   nextQuestion(){
+    this.stopSpeak();
     this.allAnswers.push(this.currentData);
     this.count = 0;
     this.showNextButton = false;
@@ -168,12 +177,21 @@ export class TestPageComponent implements OnInit {
       this.fetchData();
     }
     else{
-      console.log(this.allAnswers);
+      this.allAnswers.forEach(item => {
+        item.options.forEach(each => {
+          if(each.answer !== each.givenAnswer){
+            this.wrongAnswers += 1;
+          }
+
+        })
+      })
     }
+    console.log('right answers:', this.allAnswers.length - this.wrongAnswers);
   }
 
   ngOnInit(): void {
-    this.fetchData();
+    this.currentData = this.data[this.currentIndex];
+    this.sayQuestion();
   }
   sayQuestion(){
     this.speak(this.currentData.explanation);

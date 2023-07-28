@@ -4,15 +4,15 @@
     <span class="left">left</span>
     <span class="right">right</span>
   </div>
-  <p class="explanation"><span>{{ currentIndex + 1 }}</span>{{ currentData?.explanation}}</p>
+  <p class="explanation"><span>{{ currentIndex + 1 + "." }}</span>{{ currentData?.explanation}}</p>
   <div [ngClass]="(i <= count && count > -1)?'':'hide'" *ngFor="let item of currentData?.options; let i = index" class="question">
       <p>{{item.question}}</p>
       <label class="answer">
         <label>
-          <input (click)="moveForward($event)" type="radio" [value]="true">yes
+          <input (click)="moveForward($event, i)" type="radio" [value]="true">yes
         </label>
         <label>
-          <input (click)="moveForward($event)" type="radio" [value]="false">no
+          <input (click)="moveForward($event, i)" type="radio" [value]="false">no
         </label>
       </label>
   </div>

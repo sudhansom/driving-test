@@ -1,10 +1,10 @@
 <div class="container">
   <div class="image">
-    <img src="../../../assets/images/image1.png" alt="">
+    <img [src]="currentData?.image" width="700px" height="500px" alt="" loading="lazy">
     <span class="left">left</span>
     <span class="right">right</span>
   </div>
-  <p class="explanation">{{ currentData?.explanation}}</p>
+  <p class="explanation"><span>{{ currentIndex + 1 }}</span>{{ currentData?.explanation}}</p>
   <div [ngClass]="(i <= count && count > -1)?'':'hide'" *ngFor="let item of currentData?.options; let i = index" class="question">
       <p>{{item.question}}</p>
       <label class="answer">

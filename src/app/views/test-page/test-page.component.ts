@@ -11,6 +11,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class TestPageComponent implements OnInit {
 
+  currentUtterance: SpeechSynthesisUtterance | null = null;
+
   count = -1;
   currentData: any;
 
@@ -18,10 +20,12 @@ export class TestPageComponent implements OnInit {
 
   currentIndex = 0;
 
+  answers = [];
+
   data = [
     {
       image: '../../../assets/images/image1.png',
-      explanation: '1.What are the rules about warning triangle, in this situation?',
+      explanation: ' What are the rules about warning triangle, in this situation?',
       options: [
         {
           question: 'A warning triangle has to be placed 30 meters from the car.',
@@ -42,23 +46,23 @@ export class TestPageComponent implements OnInit {
       ]
     },
     {
-      image: '../../../assets/images/image1.png',
-      explanation: '2.What are the rules about warning triangle, in this situation?',
+      image: '../../../assets/images/image2.png',
+      explanation: ' You are staying by the curb and would like to set off. What will you do?',
       options: [
         {
-          question: 'A warning triangle has to be placed 30 meters from the car.',
+          question: 'I carefully set off straight away?',
           answer: true,
         },
         {
-          question: 'A warning triangle has to be placed 60 meters from the car.',
-          answer: false,
+          question: 'I make orientation in the blind angles, behind on my left?',
+          answer: true,
         },
         {
-          question: 'A warning triangle has to be placed 80 meters from the car.',
-          answer: false,
+          question: 'If there is no traffic, I will set off?',
+          answer: true,
         },
         {
-          question: 'A warning triangle has to be placed 100 meters from the car.',
+          question: 'I wait a bit more to set off?',
           answer: false,
         }
       ]
@@ -67,8 +71,9 @@ export class TestPageComponent implements OnInit {
 
   fetchData(){
   this.currentData = this.data[this.currentIndex];
-  setTimeout(()=>{
+  const timerId = setTimeout(()=>{
     this.sayQuestion();
+    clearTimeout(timerId);
   }, 100)
   }
 
@@ -76,6 +81,7 @@ export class TestPageComponent implements OnInit {
   moveForward(){
     if(this.count < this.currentData.options.length - 1){
       this.count = this.count + 1;
+      this.stopSpeak();
       this.speak(this.currentData.options[this.count].question);
     }
     else {
@@ -86,9 +92,10 @@ export class TestPageComponent implements OnInit {
   nextQuestion(){
     this.count = 0;
     this.showNextButton = false;
-    this.currentIndex = this.currentIndex + 1;
-    this.fetchData();
-    this.sayQuestion();
+    if(this.currentIndex < this.data.length){
+      this.currentIndex = this.currentIndex + 1;
+      this.fetchData();
+    }
   }
 
   ngOnInit(): void {
@@ -96,10 +103,11 @@ export class TestPageComponent implements OnInit {
   }
   sayQuestion(){
     this.speak(this.currentData.explanation);
-  setTimeout(()=>{
-    this.count = 0;
-    this.speak(this.currentData.options[this.count].question);
-  }, 5000)
+    const timerId = setTimeout(()=>{
+      this.count = 0;
+      this.speak(this.currentData.options[this.count].question);
+      clearTimeout(timerId);
+    }, 5000)
   }
 
 
@@ -107,10 +115,21 @@ export class TestPageComponent implements OnInit {
     if ('speechSynthesis' in window) {
       const speechSynthesis = window.speechSynthesis;
       const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.rate = .85;
       speechSynthesis.speak(utterance);
+      this.currentUtterance = utterance;
+
     } else {
       alert('Speech synthesis is not supported in this browser.');
     }
   }
+  stopSpeak(): void {
+    if ('speechSynthesis' in window) {
+      const speechSynthesis = window.speechSynthesis;
+      speechSynthesis.cancel(); // Cancel the ongoing speech
+      this.currentUtterance = null;
+    }
+  }
+
 }
 

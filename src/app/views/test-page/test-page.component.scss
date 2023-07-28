@@ -12,10 +12,11 @@
     .left {
       position: absolute;
       inset: 0;
-      left: -24px;
+      left: -30px;
     }
     .right {
       position: absolute;
+      right: -35px;
     }
     .explanation {
       font-size: 30px;
@@ -35,6 +36,13 @@
     button {
       display: block;
       margin-left: auto;
+      padding: 5px 12px;
+      background-color: rgb(64, 202, 64);
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 9px;
     }
   }
 }

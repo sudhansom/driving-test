@@ -6,6 +6,17 @@
     img {
       max-width: 100%;
     }
+    .image {
+      position: relative;
+    }
+    .left {
+      position: absolute;
+      inset: 0;
+      left: -24px;
+    }
+    .right {
+      position: absolute;
+    }
     .explanation {
       font-size: 30px;
       font-weight: bold;

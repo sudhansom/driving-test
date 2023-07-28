@@ -11,11 +11,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class TestPageComponent implements OnInit {
 
-  count = 11;
+  count = -1;
+  currentData: any;
 
   showNextButton = false;
 
-  currentIndex$ = new BehaviorSubject(0);
+  currentIndex = 0;
 
   data = [
     {
@@ -64,11 +65,18 @@ export class TestPageComponent implements OnInit {
     },
   ];
 
-  currentData = this.data[this.currentIndex$.getValue()];
+  fetchData(){
+  this.currentData = this.data[this.currentIndex];
+  setTimeout(()=>{
+    this.sayQuestion();
+  }, 100)
+  }
+
 
   moveForward(){
     if(this.count < this.currentData.options.length - 1){
       this.count = this.count + 1;
+      this.speak(this.currentData.options[this.count].question);
     }
     else {
       this.showNextButton = true;
@@ -76,15 +84,33 @@ export class TestPageComponent implements OnInit {
   }
 
   nextQuestion(){
-    console.log(this.currentIndex$.getValue());
-    this.currentIndex$.next(this.currentIndex$.getValue() + 1);
-    console.log(this.currentIndex$.getValue());
+    this.count = 0;
+    this.showNextButton = false;
+    this.currentIndex = this.currentIndex + 1;
+    this.fetchData();
+    this.sayQuestion();
   }
 
   ngOnInit(): void {
-    setTimeout(()=>{
-      this.count = 10;
-    }, 5000)
+    this.fetchData();
+  }
+  sayQuestion(){
+    this.speak(this.currentData.explanation);
+  setTimeout(()=>{
+    this.count = 0;
+    this.speak(this.currentData.options[this.count].question);
+  }, 5000)
+  }
+
+
+  speak(textToSpeak: string): void {
+    if ('speechSynthesis' in window) {
+      const speechSynthesis = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      speechSynthesis.speak(utterance);
+    } else {
+      alert('Speech synthesis is not supported in this browser.');
+    }
   }
 }
 

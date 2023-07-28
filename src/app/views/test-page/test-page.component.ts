@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 
 
@@ -10,11 +11,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class TestPageComponent implements OnInit {
 
-  count = -1;
+  count = 11;
 
   showNextButton = false;
 
-  currentIndex = 0;
+  currentIndex$ = new BehaviorSubject(0);
 
   data = [
     {
@@ -63,7 +64,7 @@ export class TestPageComponent implements OnInit {
     },
   ];
 
-  currentData = this.data[this.currentIndex];
+  currentData = this.data[this.currentIndex$.getValue()];
 
   moveForward(){
     if(this.count < this.currentData.options.length - 1){
@@ -75,14 +76,15 @@ export class TestPageComponent implements OnInit {
   }
 
   nextQuestion(){
-    this.currentIndex = this.currentIndex + 1;
+    console.log(this.currentIndex$.getValue());
+    this.currentIndex$.next(this.currentIndex$.getValue() + 1);
+    console.log(this.currentIndex$.getValue());
   }
 
   ngOnInit(): void {
     setTimeout(()=>{
-      this.count = 0;
+      this.count = 10;
     }, 5000)
   }
-
 }
 

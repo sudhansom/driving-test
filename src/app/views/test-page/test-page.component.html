@@ -2,7 +2,7 @@
   <div class="image">
     <img src="../../../assets/images/image1.png" alt="">
   </div>
-  <p class="explanation">{{ currentData?.explanation}}</p>
+  <p class="explanation"><span>{{ currentIndex$ | async}}</span> {{ currentData?.explanation}}</p>
   <div [ngClass]="(i <= count && count > -1)?'':'hide'" *ngFor="let item of currentData?.options; let i = index" class="question">
       <p>{{item.question}}</p>
       <label class="answer">

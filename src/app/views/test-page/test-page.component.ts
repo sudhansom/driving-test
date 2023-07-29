@@ -11,7 +11,10 @@ import { data } from 'src/app/data';
 })
 export class TestPageComponent implements OnInit {
 
+  Math: any;
+
   data = data;
+  time = new BehaviorSubject(1500);
 
   currentUtterance: SpeechSynthesisUtterance | null = null;
 
@@ -86,6 +89,10 @@ export class TestPageComponent implements OnInit {
   ngOnInit(): void {
     this.currentData = this.data[this.currentIndex];
     this.sayQuestion();
+
+    setInterval(()=>{
+      this.time.next(this.time.getValue() - 1);
+    }, 1000)
   }
   sayQuestion(){
     this.speak(this.currentData.explanation);
@@ -115,6 +122,9 @@ export class TestPageComponent implements OnInit {
       speechSynthesis.cancel(); // Cancel the ongoing speech
       this.currentUtterance = null;
     }
+  }
+  constructor(){
+    this.Math = Math;
   }
 
 }

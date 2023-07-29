@@ -1,3 +1,7 @@
+<div class="navbar">
+  <p class="logo">Practice Practice Practice </p>
+  <p class="timer">{{ Math.floor(time.getValue() / 60)  }} : {{ time.getValue() % 60}}</p>
+</div>
 <div class="container" *ngIf="!finished">
   <div class="image">
     <img [src]="currentData?.image" width="700px" height="500px" alt="" loading="lazy">

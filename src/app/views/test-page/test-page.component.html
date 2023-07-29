@@ -40,7 +40,7 @@
             </label>
           </label>
         </div>
-        <p class="correct-answer" [ngClass]="each.answer !== each.givenAnswer? 'wrong':''">{{each.givenAnswer}}.   {{each.reason}}</p>
+        <p class="correct-answer" [ngClass]="each.answer !== each.givenAnswer? 'wrong':''">{{each.answer===true? 'yes. ': 'no. '}}   {{each.reason}}</p>
     </div>
     <hr>
   </ng-container>

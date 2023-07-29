@@ -12,11 +12,20 @@
     .left {
       position: absolute;
       inset: 0;
-      left: -30px;
+      top: -20px;
+      @media(min-width: 768px){
+        top: 0;
+        left: -30px;
+      }
     }
     .right {
       position: absolute;
-      right: -35px;
+      top: -20px;
+      right: 0;
+      @media(min-width: 768px){
+        top: 0;
+        right: -35px;
+      }
     }
     .explanation {
       font-size: 30px;
@@ -27,10 +36,17 @@
     .question {
       font-size: 20px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
       gap: 100px;
       &.hide {
         display: none;
+      }
+      p {
+        flex-basis: 80%;
+      }
+      .answer {
+        flex-basis: 25%;
       }
     }
     .output {

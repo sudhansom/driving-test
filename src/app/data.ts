@@ -189,7 +189,7 @@ export const data: IData[] = [
     options: [
       {
         question: 'I carefully set off straight away?',
-        answer: true,
+        answer: false,
       },
       {
         question: 'I make orientation in the blind angles, behind on my left?',

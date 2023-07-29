@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!finished">
   <div class="image">
     <img [src]="currentData?.image" width="700px" height="500px" alt="" loading="lazy">
     <span class="left">left</span>
@@ -17,4 +17,32 @@
       </label>
   </div>
   <button *ngIf="showNextButton" (click)="nextQuestion()">Next</button>
+</div>
+
+<div class="container" *ngIf="finished">
+  <h1 style="color: red">your Wrong Answer: {{ wrongAnswers }}</h1>
+  <ng-container *ngFor="let item of allAnswers; let num = index">
+    <div class="item.image">
+      <img [src]="item?.image" width="700px" height="500px" alt="" loading="lazy">
+      <span class="left">left</span>
+      <span class="right">right</span>
+    </div>
+    <p class="explanation"><span>{{ num + 1 + "." }}</span>{{ item?.explanation}}</p>
+    <div *ngFor="let each of item?.options; let i = index" class="output" [ngClass]="each.answer !== each.givenAnswer? 'red-border':''">
+        <div class="question">
+          <p>{{each.question}}</p>
+          <label class="answer">
+            <label>
+              <input  type="radio" [value]="true">yes
+            </label>
+            <label>
+              <input type="radio" [value]="false">no
+            </label>
+          </label>
+        </div>
+        <p class="correct-answer" [ngClass]="each.answer !== each.givenAnswer? 'wrong':''">{{each.givenAnswer}}.   {{each.reason}}</p>
+    </div>
+    <hr>
+  </ng-container>
+
 </div>

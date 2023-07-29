@@ -33,6 +33,14 @@
         display: none;
       }
     }
+    .output {
+      .correct-answer {
+        color: green;
+      }
+      .wrong {
+        color: red;
+      }
+    }
     button {
       display: block;
       margin-left: auto;
@@ -43,6 +51,10 @@
       cursor: pointer;
       border: none;
       border-radius: 9px;
+    }
+    hr {
+      margin: 36px 0;
+      border: 1px solid black;
     }
   }
 }

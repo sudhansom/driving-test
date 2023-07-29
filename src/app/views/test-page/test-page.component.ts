@@ -93,7 +93,7 @@ export class TestPageComponent implements OnInit {
       this.count = 0;
       this.speak(this.currentData.options[this.count].question);
       clearTimeout(this.timerId);
-    }, 5000)
+    }, 2000)
   }
 
 

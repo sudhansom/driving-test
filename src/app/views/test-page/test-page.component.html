@@ -9,10 +9,10 @@
       <p>{{item.question}}</p>
       <label class="answer">
         <label>
-          <input (click)="moveForward($event, i)" type="radio" [value]="true">yes
+          <input (click)="moveForward($event, i)" type="radio" name="answer" [value]="true">yes
         </label>
         <label>
-          <input (click)="moveForward($event, i)" type="radio" [value]="false">no
+          <input (click)="moveForward($event, i)" type="radio" name="answer" [value]="false">no
         </label>
       </label>
   </div>

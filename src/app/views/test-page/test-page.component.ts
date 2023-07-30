@@ -86,14 +86,6 @@ export class TestPageComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.currentData = this.data[this.currentIndex];
-    this.sayQuestion();
-
-    setInterval(()=>{
-      this.time.next(this.time.getValue() - 1);
-    }, 1000)
-  }
   sayQuestion(){
     this.speak(this.currentData.explanation);
      this.timerId = setTimeout(()=>{
@@ -125,6 +117,15 @@ export class TestPageComponent implements OnInit {
   }
   constructor(){
     this.Math = Math;
+  }
+
+  ngOnInit(): void {
+    this.currentData = this.data[this.currentIndex];
+    this.sayQuestion();
+
+    setInterval(()=>{
+      this.time.next(this.time.getValue() - 1);
+    }, 1000)
   }
 
 }

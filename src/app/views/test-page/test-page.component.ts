@@ -38,15 +38,14 @@ export class TestPageComponent implements OnInit {
   answers = [];
 
   fetchData(){
-  this.currentData = this.data[this.currentIndex];
-  this.sayQuestion();
+    this.currentData = this.data[this.currentIndex];
+    this.sayQuestion();
   }
 
 
   moveForward(e:any, i: number){
     clearTimeout(this.timerId);
     this.currentData.options[i].givenAnswer = e.target.value==='true'? true : false;
-    console.log(this.currentData);
     if(i < this.currentData.options.length - 1){
       if(this.count < i + 1){
         this.count = i + 1;
@@ -87,8 +86,8 @@ export class TestPageComponent implements OnInit {
   }
 
   sayQuestion(){
-    this.speak(this.currentData.explanation);
-     this.timerId = setTimeout(()=>{
+    this.speak(this.currentData?.explanation);
+    this.timerId = setTimeout(()=>{
       this.count = 0;
       this.speak(this.currentData.options[this.count].question);
       clearTimeout(this.timerId);
@@ -120,8 +119,7 @@ export class TestPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentData = this.data[this.currentIndex];
-    this.sayQuestion();
+    this.fetchData();
 
     setInterval(()=>{
       this.time.next(this.time.getValue() - 1);

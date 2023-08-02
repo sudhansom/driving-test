@@ -15,6 +15,7 @@ export class InputFormComponent implements OnInit {
 
   selectedFile: File | null = null;
   imageUrl: File | null = null;
+  currentId: string = '';
 
 
   constructor(private imageUploadService: ImageUploadService) {}
@@ -34,31 +35,33 @@ export class InputFormComponent implements OnInit {
   onSubmit(): void {
     if (this.selectedFile) {
       this.reactiveForm.value.image = this.imageUrl;
-      this.imageUploadService.uploadForm(this.reactiveForm.value).subscribe(
+      const newObject = {
+        image: this.imageUrl,
+        explanation: this.reactiveForm.value.explanation,
+        options: [{question: this.reactiveForm.value.question, answer: this.reactiveForm.value.answer}]
+      }
+      this.imageUploadService.uploadForm(newObject).subscribe(
         (response) => {
-          console.log(response);
+          this.currentId = response.name;
+          this.fetchCurrentData(this.currentId);
         },
         (error) => {
           console.error('Error uploading image:', error);
         }
       );
-      this.reactiveForm.reset();
     }
   }
 
-  fetchData(){
-    this.imageUploadService.getFormData().subscribe(form => {
-      for(const key in form){
-        if(form[key]){
-          console.log(form[key].image);
-          this.imageUrl = form[key].image;
-        }
-      }
+  fetchCurrentData(currentId: string){
+    this.imageUploadService.getSubmittedForm(currentId).subscribe(form => {
+      this.imageUrl = form.image;
+      this.reactiveForm.value.question = form.question;
+      this.reactiveForm.value.explanation = form.explanation;
+
     })
   }
 
   ngOnInit(): void {
-    this.fetchData();
     this.reactiveForm = new FormGroup({
       image: new FormControl(this.imageUrl),
       explanation: new FormControl(null),

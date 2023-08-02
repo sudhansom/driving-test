@@ -27,6 +27,14 @@
         flex-direction: row;
       }
     }
+    .more-options {
+      margin: 0;
+      text-align: center;
+      cursor: pointer;
+      &:hover {
+        color: green;
+      }
+    }
 
     button {
       cursor: pointer;

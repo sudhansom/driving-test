@@ -16,6 +16,11 @@ export class InputFormComponent implements OnInit {
   selectedFile: File | null = null;
   imageUrl: File | null = null;
   currentId: string = '';
+  options: {
+    answer: boolean,
+    question: string,
+    detail?: string
+  }[] = []
 
 
   constructor(private imageUploadService: ImageUploadService) {}
@@ -35,15 +40,17 @@ export class InputFormComponent implements OnInit {
   onSubmit(): void {
     if (this.selectedFile) {
       this.reactiveForm.value.image = this.imageUrl;
+      this.addInOptions();
       const newObject = {
         image: this.imageUrl,
         explanation: this.reactiveForm.value.explanation,
-        options: [{question: this.reactiveForm.value.question, answer: this.reactiveForm.value.answer}]
+        options: this.options
       }
       this.imageUploadService.uploadForm(newObject).subscribe(
         (response) => {
           this.currentId = response.name;
-          this.fetchCurrentData(this.currentId);
+          this.imageUrl = null;
+          this.reactiveForm.reset();
         },
         (error) => {
           console.error('Error uploading image:', error);
@@ -52,22 +59,25 @@ export class InputFormComponent implements OnInit {
     }
   }
 
-  fetchCurrentData(currentId: string){
-    this.imageUploadService.getSubmittedForm(currentId).subscribe(form => {
-      this.imageUrl = form.image;
-      this.reactiveForm.value.question = form.question;
-      this.reactiveForm.value.explanation = form.explanation;
-
-    })
-  }
-
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({
       image: new FormControl(this.imageUrl),
       explanation: new FormControl(null),
       question: new FormControl(null),
       answer: new FormControl(true),
+      detail: new FormControl(null),
     })
+  }
+
+  addInOptions(){
+    this.options.push({
+      question: this.reactiveForm.value.question,
+      answer: this.reactiveForm.value.answer,
+      detail: this.reactiveForm.value.detail
+    });
+    // this.reactiveForm.value.question.reset();
+    // this.reactiveForm.value.answer.reset();
+    // this.reactiveForm.value.detail.reset();
   }
 
 }

@@ -18,7 +18,4 @@ export class ImageUploadService {
   getFormData(){
     return this.http.get<any>(`${this.apiUrl}`);
   }
-  getSubmittedForm(currentId: string){
-    return this.http.get<any>(`https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/driving/${currentId}.json`);
-  }
 }

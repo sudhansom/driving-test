@@ -3,7 +3,7 @@
     <input type="file" (change)="onFileSelected($event)" formControlName="image" accept="image/*" />
   </label>
   <label>Explanation:
-    <input type="text" formControlName="explanation" />
+    <input type="text" value="explanation" formControlName="explanation" />
   </label>
   <label>Question:
     <input type="text" formControlName="question" />
@@ -17,8 +17,9 @@
     </label>
   </label>
   <label>Answer Explanation:
-    <input type="text" />
+    <input type="text" formControlName="detail" />
   </label>
+  <p class="more-options" (click)="addInOptions()">more options?</p>
   <button type="submit">Submit</button>
   <div *ngIf="imageUrl">
     <img [src]="imageUrl" alt="Uploaded Image" />

@@ -33,8 +33,7 @@ export class InputFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.selectedFile) {
-      console.log(typeof(this.imageUrl));
-
+      this.reactiveForm.value.image = this.imageUrl;
       this.imageUploadService.uploadForm(this.reactiveForm.value).subscribe(
         (response) => {
           console.log(response);
@@ -43,17 +42,25 @@ export class InputFormComponent implements OnInit {
           console.error('Error uploading image:', error);
         }
       );
+      this.reactiveForm.reset();
     }
   }
 
-  ngOnInit(): void {
+  fetchData(){
     this.imageUploadService.getFormData().subscribe(form => {
-      //this.imageUrl = form.image;
-      console.log(form['-NaLSM7kmyicx3EhvCZg']?.image);
-      this.imageUrl = form['-NaLSM7kmyicx3EhvCZg']?.image;
+      for(const key in form){
+        if(form[key]){
+          console.log(form[key].image);
+          this.imageUrl = form[key].image;
+        }
+      }
     })
+  }
+
+  ngOnInit(): void {
+    this.fetchData();
     this.reactiveForm = new FormGroup({
-      image: new FormControl(null),
+      image: new FormControl(this.imageUrl),
       explanation: new FormControl(null),
       question: new FormControl(null),
       answer: new FormControl(true),

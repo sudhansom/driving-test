@@ -11,8 +11,8 @@ export class ImageUploadService {
   constructor(private http: HttpClient) {}
 
   uploadForm(form: any): Observable<any> {
+    console.log(form.image);
     return this.http.post<any>(`${this.apiUrl}`, form);
-    // console.log(form.image);
     // return of('')
   }
   getFormData(){

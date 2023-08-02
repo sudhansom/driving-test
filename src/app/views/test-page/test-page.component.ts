@@ -7,14 +7,14 @@ import { data } from 'src/app/data';
   selector: 'app-test-page',
   templateUrl: './test-page.component.html',
   styleUrls: ['./test-page.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestPageComponent implements OnInit {
 
   Math: any;
 
   data = data;
-  time = new BehaviorSubject(1500);
+  time$ = new BehaviorSubject(1500);
 
   currentUtterance: SpeechSynthesisUtterance | null = null;
 
@@ -122,7 +122,9 @@ export class TestPageComponent implements OnInit {
     this.fetchData();
 
     setInterval(()=>{
-      this.time.next(this.time.getValue() - 1);
+      if(!this.finished){
+        this.time$.next(this.time$.value - 1);
+      }
     }, 1000)
   }
 

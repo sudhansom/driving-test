@@ -9,6 +9,13 @@ import { Component } from '@angular/core';
   //changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TemplateFormComponent  {
+  name='sudhan';
 
+  countries = ['Nepal', 'Denmark', 'England', 'Norway', 'USA'];
+
+  onSubmit(form: any){
+    console.log(form.value);
+    form.reset();
+  }
 }
 

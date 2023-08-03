@@ -4,11 +4,16 @@
     margin: auto;
     background-color: rgb(222, 217, 217);
     border-radius: 9px;
-    padding: 12px;
+    padding: 20px;
 
     display: flex;
     flex-direction: column;
     gap: 18px;
+
+    h1 {
+      text-align: center;
+      margin: 0;
+    }
 
     label {
       display: flex;
@@ -16,7 +21,7 @@
       gap: 6px;
     }
 
-    input, button {
+    input, button, textarea, select {
       padding: 9px;
       border: none;
       border-radius: 9px;
@@ -27,18 +32,15 @@
         flex-direction: row;
       }
     }
-    .more-options {
-      margin: 0;
-      text-align: center;
-      cursor: pointer;
-      &:hover {
-        color: green;
-      }
+
+    .gender {
+      display: flex;
+      flex-direction: row;
     }
 
-    button {
+
+    .active {
       cursor: pointer;
-      margin: 12px 0 ;
       transition: all .6s ease-in-out;
       &:hover {
         background-color: rgb(183, 174, 174);

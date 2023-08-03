@@ -1,0 +1,54 @@
+:host {
+  form {
+    max-width: 500px;
+    margin: 24px auto;
+    background-color: rgb(222, 217, 217);
+    border-radius: 9px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    h1 {
+      text-align: center;
+      margin: 0;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    input, button, textarea, select {
+      padding: 9px;
+      border: none;
+      border-radius: 9px;
+    }
+    .answer {
+      flex-direction: row;
+      label {
+        flex-direction: row;
+      }
+    }
+
+    .gender {
+      display: flex;
+      flex-direction: row;
+    }
+
+
+    .active {
+      cursor: pointer;
+      transition: all .6s ease-in-out;
+      &:hover {
+        background-color: rgb(183, 174, 174);
+      }
+    }
+    img {
+      max-width: 100%;
+    }
+  }
+}

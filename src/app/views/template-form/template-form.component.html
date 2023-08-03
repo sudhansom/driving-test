@@ -17,7 +17,7 @@
     <input ngModel name="married" value="Male" #married="ngModel" type="checkbox" />
   </label>
   <label class="country">Select Country
-    <select ngModel name="country" value="country" #country="ngModel" type="">
+    <select ngModel name="country" #country="ngModel" type="">
       <option value=""></option>
       <option *ngFor="let country of countries" [value]="country">{{country}}</option>
     </select>

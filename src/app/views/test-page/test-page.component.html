@@ -1,6 +1,6 @@
 <div class="navbar">
   <p class="logo">Practice Practice Practice </p>
-  <p class="timer" *ngIf="time$ | async; let time">remaining time: {{ Math.floor(time/60) }} : {{ time % 60 }} </p>
+  <p class="timer">remaining time: {{ Math.floor(time()/60) }} : {{ time() % 60 }} </p>
 </div>
 <div class="container" *ngIf="!finished">
   <div class="image">

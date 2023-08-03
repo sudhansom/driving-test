@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { IData } from 'src/app/types';
 import { data } from 'src/app/data';
 
@@ -14,7 +13,7 @@ export class TestPageComponent implements OnInit {
   Math: any;
 
   data = data;
-  time$ = new BehaviorSubject(1500);
+  time = signal(1500);
 
   currentUtterance: SpeechSynthesisUtterance | null = null;
 
@@ -123,7 +122,7 @@ export class TestPageComponent implements OnInit {
 
     setInterval(()=>{
       if(!this.finished){
-        this.time$.next(this.time$.value - 1);
+        this.time.set(this.time() - 1);
       }
     }, 1000)
   }

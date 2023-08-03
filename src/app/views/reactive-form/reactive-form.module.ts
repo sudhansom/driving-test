@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 
 import { ReactiveFormComponent } from "./reactive-form.component";
 
@@ -21,7 +21,7 @@ const appRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(appRoutes),
-    FormsModule,
+    ReactiveFormsModule,
   ],
   exports:[],
   providers: [],

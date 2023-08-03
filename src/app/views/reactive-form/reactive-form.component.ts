@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 
@@ -9,13 +10,20 @@ import { Component } from '@angular/core';
   //changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReactiveFormComponent  {
-  name='sudhan';
+  reactiveForm = new FormGroup({
+    name: new FormControl('null', Validators.required),
+    age: new FormControl(0),
+    gender: new FormControl(),
+    details: new FormControl(),
+    married: new FormControl(),
+    country: new FormControl(),
+  })
 
   countries = ['Nepal', 'Denmark', 'England', 'Norway', 'USA'];
 
-  onSubmit(form: any){
-    console.log(form.value);
-    form.reset();
+  onSubmit(){
+    console.log(this.reactiveForm.value);
+    this.reactiveForm.reset();
   }
 }
 

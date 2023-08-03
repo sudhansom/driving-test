@@ -1,28 +1,28 @@
-<form #form="ngForm" (ngSubmit)="onSubmit(form)">
-  <h1>Template driven form practice</h1>
+<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+  <h1>Reactive Form practice</h1>
   <label>Name
-    <input required ngModel name="name" #name="ngModel" type="text" />
+    <input name="name" formControlName="name" type="text" />
   </label>
   <label>Age
-    <input ngModel name="age" #age="ngModel" type="number" />
+    <input name="age" formControlName="age" type="number" />
   </label>
   <label class="gender">Gender
-    <input ngModel name="gender" value="male" #gender="ngModel" type="radio" />Male
-    <input ngModel name="gender" value="female" #gender="ngModel" type="radio" />Female
+    <input name="gender" value="male" formControlName="gender"  type="radio" />Male
+    <input name="gender" value="female" formControlName="gender" type="radio" />Female
   </label>
   <label>Describe
-    <textarea ngModel name="details" #details="ngModel" type="text" ></textarea>
+    <textarea name="details" formControlName="details" type="text" ></textarea>
   </label>
   <label class="gender">Married
-    <input ngModel name="married" value="Male" #married="ngModel" type="checkbox" />
+    <input ngModel name="married" formControlName="married" value="Male" type="checkbox" />
   </label>
   <label class="country">Select Country
-    <select ngModel name="country" value="country" #country="ngModel" type="">
+    <select name="country" formControlName="country" type="">
       <option value=""></option>
       <option *ngFor="let country of countries" [value]="country">{{country}}</option>
     </select>
   </label>
 
-  <button [ngClass]="form.valid?'active':'inactive'" [disabled]="!form.valid" type="submit">Submit</button>
-  <!-- <p>{{ form.value | json }}</p> -->
+  <button [ngClass]="reactiveForm.valid?'active':'inactive'" [disabled]="!reactiveForm.valid" type="submit">Submit</button>
+  <p>{{ reactiveForm.value | json }}</p>
 </form>

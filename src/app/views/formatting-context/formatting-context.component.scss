@@ -1,15 +1,29 @@
 :host {
+  *, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
  .container {
   max-width: 1000px;
   margin: 50px auto;
   padding: 20px;
   outline: 1px solid red;
   columns: 2;
-  .float {
+  &__float {
     width: 100px;
     height: 400px;
     background-color: rgb(102, 58, 102);
     float: left;
+  }
+  &__paragraph {
+    margin: 24px 0 ;
+    &--light {
+    background-color: lightgreen;
+    }
+    &--dark {
+    background-color: green;
+    }
   }
  }
 

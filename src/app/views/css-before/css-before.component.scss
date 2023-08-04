@@ -3,13 +3,34 @@
     max-width: 600px;
     margin: auto;
     border-radius: 12px;
-    padding: 12px;
     .wrapper {
       background-color: #e6e6e6;
+      padding: 12px;
+
       ol {
         padding: 0;
         counter-reset: list-items;
+        display: flex;
+        li {
+          list-style-type: none;
+          flex-basis: 100%;
+          text-align: center;
+          &::before {
+            counter-increment: list-items;
+            content: counter(list-items);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border: 5px solid black;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+          }
+
+        }
       }
+
     }
   }
 }

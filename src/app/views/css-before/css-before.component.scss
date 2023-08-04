@@ -1,0 +1,15 @@
+:host {
+  .container {
+    max-width: 600px;
+    margin: auto;
+    border-radius: 12px;
+    padding: 12px;
+    .wrapper {
+      background-color: #e6e6e6;
+      ol {
+        padding: 0;
+        counter-reset: list-items;
+      }
+    }
+  }
+}

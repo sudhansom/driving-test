@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'formatting', loadChildren: () => import('./views/formatting-context/formatting-context.module').then((mod)=>mod.FormattingContextModule)},
   { path: 'css-before', loadChildren: () => import('./views/css-before/css-before.module').then((mod)=>mod.CssBeforeModule)},
   { path: '', loadChildren: () => import('./views/test-page/test-page.module').then((mod) => mod.TestModule)},
+  { path: 'linked-list', loadChildren: () => import('./views/linked-list/linked-list.module').then((mod) => mod.InputFormModule)},
 ];
 
 @NgModule({

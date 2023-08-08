@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class ImageUploadService {
-  private apiUrl = 'https://angular-project-866ab-default-rtdb.europe-west1.firebasedatabase.app/driving.json'; // Replace this with your server API URL
+  private apiUrl = 'https://angular-project-cf39b-default-rtdb.europe-west1.firebasedatabase.app/driving.json'; // Replace this with your server API URL
 
   constructor(private http: HttpClient) {}
 

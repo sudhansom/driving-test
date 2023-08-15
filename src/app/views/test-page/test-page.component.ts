@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { PlatformLocation } from '@angular/common';
+
 import { IData } from 'src/app/types';
 import { data } from 'src/app/data';
 
@@ -8,7 +10,11 @@ import { data } from 'src/app/data';
   styleUrls: ['./test-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TestPageComponent implements OnInit {
+export class TestPageComponent implements OnInit, OnDestroy {
+
+  private clearPopListener = this.platformLocation.onPopState(() => {
+    this.stopSpeak();
+  });
 
   Math: any;
 
@@ -113,7 +119,7 @@ export class TestPageComponent implements OnInit {
       this.currentUtterance = null;
     }
   }
-  constructor(){
+  constructor(private platformLocation: PlatformLocation){
     this.Math = Math;
   }
 
@@ -125,6 +131,10 @@ export class TestPageComponent implements OnInit {
         this.time.set(this.time() - 1);
       }
     }, 1000)
+  }
+
+  ngOnDestroy(): void {
+    this.clearPopListener();
   }
 
 }

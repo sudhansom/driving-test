@@ -47,7 +47,33 @@
 }
 
 .my-website {
+  width: 100%;
+  background-color: rgb(173, 168, 168);
   display: grid;
+  grid-gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 100px 300px 300px 100px;
+}
+nav {
+  background-color: blue;
+  grid-column: 1/-1;
+}
+aside {
+  background-color: green;
+  grid-row: 2/4;
+}
+footer {
+  background-color: #234;
+  grid-row: 4 / -1;
+  grid-column: 1 / -1;
+}
+main {
+  background-color: rgb(24, 97, 170);
+  grid-column: 2 / -1;
+}
+.box {
+  background-color: rgb(7, 189, 128);
+
 }
 
 

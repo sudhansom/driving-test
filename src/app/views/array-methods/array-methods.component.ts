@@ -32,5 +32,13 @@ export class ArrayMethodsComponent {
     this.message += ' -> ' + 'shift - new';
     this.myArray.unshift('new');
   }
+  splice(){
+    this.message += ' -> ' + 'splice(1,4,"f")';
+    this.myArray.splice(1,4, "f");
+  }
+  slice(){
+    this.message += ' -> ' + 'splice(1,4)';
+    this.originalArray = [...this.myArray.slice(1,4)];
+  }
 }
 

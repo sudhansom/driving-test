@@ -41,6 +41,13 @@
         padding: 7px;
         font-size: 20px;
         font-weight: bold;
+        cursor: pointer;
+        background-color: rgb(242, 240, 240);
+        margin: 2px;
+        transition: all .4s ease-in-out;
+        &:hover {
+          filter: brightness(.95);
+        }
       }
     }
   }

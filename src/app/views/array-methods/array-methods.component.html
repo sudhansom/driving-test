@@ -1,10 +1,10 @@
 <div class="array-methods">
   <h1>Array Method Practice: </h1>
-  <p>original array</p>
+  <p>original array:</p>
   <ul class="original-array">
     <li *ngFor="let item of originalArray">{{item}}</li>
   </ul>
-  <p>updated array</p>
+  <p>updated array:</p>
   <ul>
     <li *ngFor="let item of myArray" [class]="originalArray.includes(item)?'':'new-item'">{{item}}</li>
   </ul>

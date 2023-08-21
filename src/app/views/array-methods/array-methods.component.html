@@ -1,12 +1,20 @@
 <div class="array-methods">
   <h1>Array Method Practice: </h1>
+  <p>original array</p>
+  <ul class="original-array">
+    <li *ngFor="let item of originalArray">{{item}}</li>
+  </ul>
+  <p>updated array</p>
   <ul>
     <li *ngFor="let item of myArray" [class]="originalArray.includes(item)?'':'new-item'">{{item}}</li>
   </ul>
   <div class="methods">
     <h2>Methods: </h2>
     <ol>
-      <li (click)="pushItem()">push</li>
+      <li (click)="pushItem()">push <span>-- adds an item at the end of the array</span></li>
+      <li (click)="popItem()">pop <span>-- removes an item from the end of the array</span></li>
+      <li (click)="shiftItem()">shift <span>-- adds an item at the start of the array</span></li>
+      <li (click)="unShiftItem()">unshift <span>-- removes an item from the start of the array</span></li>
     </ol>
   </div>
 </div>

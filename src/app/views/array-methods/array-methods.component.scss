@@ -3,6 +3,9 @@
     border: 1px solid gray;
     border-radius: 12px;
     padding: 24px;
+    .original-array {
+      margin-bottom: 12px;
+    }
     h1 {
       text-align: center;
     }
@@ -19,7 +22,7 @@
         border: 1px solid green;
         text-align: center;
         padding: 5px;
-        .new-item {
+        &.new-item {
           color: red;
         }
       }
@@ -27,6 +30,17 @@
 
           border: 1px solid red;
 
+      }
+    }
+    ol > li > span {
+      font-size: 12px;
+      color: gray;
+    }
+    ol {
+      li {
+        padding: 7px;
+        font-size: 20px;
+        font-weight: bold;
       }
     }
   }

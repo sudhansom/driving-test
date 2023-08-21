@@ -17,5 +17,14 @@ export class ArrayMethodsComponent {
   pushItem(){
     this.myArray.push('new');
   }
+  popItem(){
+    this.myArray.pop();
+  }
+  unShiftItem(){
+    this.myArray.shift();
+  }
+  shiftItem(){
+    this.myArray.unshift('new');
+  }
 }
 

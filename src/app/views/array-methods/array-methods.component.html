@@ -4,7 +4,7 @@
   <ul class="original-array">
     <li *ngFor="let item of originalArray">{{item}}</li>
   </ul>
-  <p>updated array:</p>
+  <p>updated array: {{message}}</p>
   <ul>
     <li *ngFor="let item of myArray" [class]="originalArray.includes(item)?'':'new-item'">{{item}}</li>
   </ul>

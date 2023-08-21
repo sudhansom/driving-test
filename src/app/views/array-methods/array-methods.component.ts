@@ -14,16 +14,22 @@ export class ArrayMethodsComponent {
   myArray: string[] = ['a', 'b', 'c', 'd', 'e'];
   originalArray: string[] = [...this.myArray];
 
+  message = '';
+
   pushItem(){
+    this.message += ' -> ' + 'push - new';
     this.myArray.push('new');
   }
   popItem(){
+    this.message += ' -> ' + 'pop';
     this.myArray.pop();
   }
   unShiftItem(){
+    this.message += ' -> ' + 'unshift';
     this.myArray.shift();
   }
   shiftItem(){
+    this.message += ' -> ' + 'shift - new';
     this.myArray.unshift('new');
   }
 }

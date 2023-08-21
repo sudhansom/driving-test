@@ -1,6 +1,12 @@
 <div class="array-methods">
   <h1>Array Method Practice: </h1>
   <ul>
-    <li *ngFor="let item of myArray">{{item}}</li>
+    <li *ngFor="let item of myArray" [class]="originalArray.includes(item)?'':'new-item'">{{item}}</li>
   </ul>
+  <div class="methods">
+    <h2>Methods: </h2>
+    <ol>
+      <li (click)="pushItem()">push</li>
+    </ol>
+  </div>
 </div>

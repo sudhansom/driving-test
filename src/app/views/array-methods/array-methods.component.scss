@@ -19,6 +19,14 @@
         border: 1px solid green;
         text-align: center;
         padding: 5px;
+        .new-item {
+          color: red;
+        }
+      }
+      li:is(.new-item){
+
+          border: 1px solid red;
+
       }
     }
   }

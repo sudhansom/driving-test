@@ -41,5 +41,11 @@ export class ArrayMethodsComponent {
     this.message += ' -> ' + 'map()';
     this.myArray = [...this.myArray.map((item, i)=> `${i} ${item}`)]
   }
+
+  filter(){
+    this.message += ' -> ' + 'map()';
+    this.myArray = [...this.myArray.filter((i)=> i < 'd')];
+  }
+
 }
 

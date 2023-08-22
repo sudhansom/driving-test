@@ -37,5 +37,9 @@ export class ArrayMethodsComponent {
     this.message += ' -> ' + 'splice(1,4)';
     this.originalArray = [...this.myArray.slice(1,4)];
   }
+  map(){
+    this.message += ' -> ' + 'map()';
+    this.myArray = [...this.myArray.map((item, i)=> `${i} ${item}`)]
+  }
 }
 

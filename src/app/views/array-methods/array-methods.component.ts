@@ -43,8 +43,13 @@ export class ArrayMethodsComponent {
   }
 
   filter(){
-    this.message += ' -> ' + 'map()';
+    this.message += ' -> ' + 'filter()';
     this.myArray = [...this.myArray.filter((i)=> i < 'd')];
+  }
+
+  reduce(){
+    this.message += ' -> ' + 'reduce()';
+    this.myArray = [this.myArray.reduce((accumulator, current)=> `${accumulator}${current}`)];
   }
 
 }
